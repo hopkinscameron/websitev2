@@ -18,6 +18,14 @@
       "es2018",
       "dom",
       "es2018.promise",
+    ],
+    "plugins": [
+        {
+            "name": "typescript-tslint-plugin"
+        },
+        {
+            "name": "typescript-eslint"
+        }
     ]
   },
   "angularCompilerOptions": {
