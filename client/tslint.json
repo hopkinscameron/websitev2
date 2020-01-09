@@ -1,13 +1,22 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "align": [true, "parameters", "members", "statements"],
+    "array-bracket-spacing": [true, "never"],
     "array-type": false,
     "arrow-parens": false,
+    "brace-style": [
+      true,
+      "1tbs",
+      { "allowSingleLine": true }
+    ],
     "deprecation": {
       "severity": "warning"
     },
+    "comment-format": [true, "check-space"],
     "component-class-suffix": true,
     "contextual-lifecycle": true,
+    "curly": [true, "ignore-same-line"],
     "directive-class-suffix": true,
     "directive-selector": [
       true,
@@ -21,10 +30,26 @@
       "app",
       "kebab-case"
     ],
+    "function-name": [
+      true,
+      {
+        "function-regex": "^[a-z][\\w\\d]+$",
+        "method-regex": "^[a-z][\\w\\d]+$",
+        "private-method-regex": "^[a-z][\\w\\d]+$",
+        "protected-method-regex": "^[a-z][\\w\\d]+$",
+        "static-method-regex": "^[a-z][\\w\\d]+$"
+      }
+    ],
+    "indent": [
+      true,
+      "tabs",
+      4
+    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
     ],
+    "import-name": true,
     "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
@@ -52,6 +77,7 @@
       "timeEnd",
       "trace"
     ],
+    "no-else-after-return": true,
     "no-empty": false,
     "no-inferrable-types": [
       true,
@@ -61,6 +87,7 @@
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,
+    "object-curly-spacing": [true, "always"],
     "object-literal-key-quotes": [
       true,
       "as-needed"
@@ -71,8 +98,17 @@
       true,
       "single"
     ],
+    "semicolon": [true, "always"],
+    "space-in-parens": [true, "never"],
+    "ter-prefer-arrow-callback": [true],
+    "ter-arrow-parens": [
+      true,
+      "as-needed",
+      { "requireForBlockBody": true }
+    ],
     "trailing-comma": false,
     "no-conflicting-lifecycle": true,
+    "no-duplicate-imports": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
@@ -80,10 +116,22 @@
     "no-output-on-prefix": true,
     "no-output-rename": true,
     "no-outputs-metadata-property": true,
+    "no-parameter-reassignment": true,
+    "no-this-assignment": true,
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
     "template-banana-in-box": true,
     "template-no-negated-async": true,
+    "triple-equals": [true, "allow-null-check"],
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "variable-name": [true, "check-format"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-preblock"
+    ]
   },
   "rulesDirectory": [
     "codelyzer"

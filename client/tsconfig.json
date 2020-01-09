@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
@@ -16,7 +16,8 @@
     ],
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+      "es2018.promise",
     ]
   },
   "angularCompilerOptions": {
