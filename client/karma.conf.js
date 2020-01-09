@@ -9,7 +9,8 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
-      require('karma-coverage-istanbul-reporter'),
+	  require('karma-coverage-istanbul-reporter'),
+	  require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -19,12 +20,25 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/client'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
-    },
-    reporters: ['progress', 'kjhtml'],
+	},
+	angularCli: {
+		environment: 'dev'
+	},
+	reporters: ['coverage', 'progress', 'kjhtml', 'spec'],
+	specReporters: {
+		suppressErrorSummary: false,
+		suppressFailed: false,
+		suppressPassed: false,
+		suppressSkipped: false,
+		showSpecTiming: true,
+		failFast: false
+	},
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+	autoWatch: true,
+	captureTimeout: 60000,
+	browserNoActivityTimeout: 60000,
     browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true

@@ -8,6 +8,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+    })
+      .compileComponents();
   }));
 });
