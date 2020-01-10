@@ -8,7 +8,7 @@
     "build": "ng build -c development",
     "build-prod": "ng build --prod",
     "build-full-prod": "npm run commit-prep && ng build --prod",
-    "test": "ng test --reporters=spec",
+    "test": "ng test --browsers=ChromeHeadless --reporters=spec",
     "lint": "./node_modules/.bin/eslint \"src/**/*.ts\" --ignore-path \".eslintignore\"",
     "lint-fix": "./node_modules/.bin/eslint \"src/**/*.ts\" --ignore-path \".eslintignore\" --fix",
     "lint-errors": "./node_modules/.bin/eslint \"src/**/*.ts\" --quiet",
