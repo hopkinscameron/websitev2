@@ -8,16 +8,16 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		RouterModule.forRoot(appRoutes),
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

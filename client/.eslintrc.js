@@ -10,10 +10,11 @@ module.exports = {
     ],
     'parser': '@typescript-eslint/parser',
     'parserOptions': {
+		'ecmaVersion': 2019,
         'project': 'tsconfig.json',
         'sourceType': 'module'
-    },
-    'plugins': ['@typescript-eslint'],
+	},
+	'plugins': ['@typescript-eslint/eslint-plugin'],
     'rules': {
         '@typescript-eslint/no-unused-vars': 'error',
         '@typescript-eslint/no-use-before-define': 'off',
@@ -81,7 +82,7 @@ module.exports = {
         ],
         'id-match': 'error',
 		'import/order': 'off',
-		'indent': ['error', 2, { 'SwitchCase': 1 }],
+		'indent': ['error', "tab", { 'SwitchCase': 1 }],
         'key-spacing': 'error',
         'keyword-spacing': 'error',
         'max-classes-per-file': 'off',
