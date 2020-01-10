@@ -6,7 +6,7 @@
     "importHelpers": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "stringNullChecks": false
+    "strictNullChecks": false
   },
   "files": [
     "src/main.ts",
