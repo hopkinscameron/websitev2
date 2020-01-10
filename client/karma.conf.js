@@ -40,7 +40,7 @@ module.exports = function (config) {
 	captureTimeout: 60000,
 	browserNoActivityTimeout: 60000,
     browsers: ['Chrome'],
-    singleRun: false,
+    singleRun: true, // set to true for deployment?
     restartOnFileChange: true
   });
 };
