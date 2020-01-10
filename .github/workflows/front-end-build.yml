@@ -38,6 +38,6 @@ jobs:
     - name: build --prod
       working-directory: ./client
       run: |
-        ng build --prod
+        npm run build-prod
       env:
         CI: true
