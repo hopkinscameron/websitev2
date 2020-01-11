@@ -5,9 +5,9 @@ describe('CoreController', () => {
 	const req = {};
 	const res = { json: jasmine.createSpy('json') };
 
-	it('should be able to play a Song', () => {
-		const result = coreController.healthCheck(req, res);
-		expect(result).toBeFalsy();
+	it('should return health check success', () => {
+		coreController.healthCheck(req, res);
+		expect(res.json).toHaveBeenCalledTimes(1);
 	});
 
 	// describe('when song has been paused', () => {
