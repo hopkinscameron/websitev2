@@ -13,7 +13,7 @@
     "lint-fix": "./node_modules/.bin/eslint \"src/**/*.ts\" --ignore-path \".eslintignore\" --fix",
     "lint-errors": "./node_modules/.bin/eslint \"src/**/*.ts\" --quiet",
     "e2e": "ng e2e",
-    "commit-prep": "ng test --browsers=ChromeHeadless --reporters=spec && npm run lint"
+    "commit-prep": "npm run test && npm run lint"
   },
   "private": true,
   "dependencies": {

@@ -11,12 +11,13 @@
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "serve-debug": "nodemon --inspect dist/index.js",
-    "test": "ng test --browsers=ChromeHeadless --reporters=spec",
+    "test": "npm run build-ts && node node_modules/jasmine/bin/jasmine.js",
+    "watch-test": "node_modules/nodemon/bin/nodemon.js -w dist ./node_modules/.bin/jasmine",
     "lint": "./node_modules/.bin/eslint \"**/*.ts\" --ignore-path \".eslintignore\"",
     "lint-fix": "./node_modules/.bin/eslint \"**/*.ts\" --ignore-path \".eslintignore\" --fix",
     "lint-errors": "./node_modules/.bin/eslint \"**/*.ts\" --quiet",
     "e2e": "ng e2e",
-    "commit-prep": "ng test --browsers=ChromeHeadless --reporters=spec && npm run lint"
+    "commit-prep": "npm run test && npm run lint"
   },
   "private": true,
   "dependencies": {
@@ -50,7 +51,7 @@
     "@typescript-eslint/eslint-plugin": "~2.15.0",
     "@typescript-eslint/parser": "~2.15.0",
     "codelyzer": "~5.2.1",
-    "jasmine-core": "~3.1.0",
+    "jasmine": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.4.1",
     "karma-chrome-launcher": "~3.1.0",

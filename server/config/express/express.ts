@@ -107,18 +107,28 @@ export default class Express implements IExpress {
      * @returns {void} nothing to be returned
      */
     private initSwagger(): void {
-    	const swaggerDefinition = {
-    		info: {
-    			title: 'REST API for my website',
-    			version: this.config.config.version,
-    			description: 'This is the REST API for my website',
-    		},
-    		host: `${this.config.config.host}:${this.config.config.port}`,
-    		basePath: '/api'
-    	};
-
     	const options = {
-    		swaggerDefinition,
+    		definition: {
+    			openapi: '3.0.0',
+    			info: {
+    				title: 'REST API for my website',
+    				version: this.config.config.version,
+    				description: 'This is the REST API for my website',
+    			},
+    			servers: [
+    				{
+    					url: `{scheme}://${this.config.config.host}:{port}/{basePath}`,
+    					description: 'The development API server',
+    					variables: {
+    						scheme: { default: 'http' },
+    						port: { default: this.config.config.port },
+    						basePath: { default: 'api' }
+    					}
+    				}
+    			],
+    			consumes: ['application/json'],
+    			produces: ['application/json']
+    		},
     		apis: ['**/*.ts']
     	};
 
