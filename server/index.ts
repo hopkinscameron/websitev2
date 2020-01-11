@@ -1,5 +1,5 @@
-import { Config } from './config/configuration/config';
-import { Express } from './config/express/express';
+import Config from './config/configuration/config';
+import Express from './config/express/express';
 
 const config = new Config();
 const express = new Express();
@@ -13,4 +13,4 @@ if (!module.parent) {
 	});
 }
 
-export const app = express.app;
+export default express.app;

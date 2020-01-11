@@ -1,17 +1,18 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
-	"downlevelIteration": true,
-	"emitDecoratorMetadata": true,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "CommonJS",
+    "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "ESNext",
+    "target": "es6",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -33,6 +34,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
-  "include": ["**.ts", "config/**/*", "app/**/*"],
+  "include": ["**.ts", "config/**/*", "app/**/*", "index.js"],
   "exclude": ["node_modules", "dist/**/*", "start.js"]
 }

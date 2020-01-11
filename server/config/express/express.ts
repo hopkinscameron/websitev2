@@ -1,8 +1,8 @@
 import * as path from 'path';
 
-import { Config } from '../configuration/config';
-import { IExpress } from './iexpress';
-import _ from 'lodash';
+import Config from '../configuration/config';
+import CoreRoutes from '../../app/core/core.routes';
+import IExpress from './iexpress';
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cookieParser from 'cookie-parser';
@@ -16,7 +16,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
 /** @inheritdoc */
-export class Express implements IExpress {
+export default class Express implements IExpress {
     /** @inheritdoc */
     readonly app: express.Application;
 
@@ -96,22 +96,8 @@ export class Express implements IExpress {
     	this.initSwagger();
 
     	const router = express.Router();
-
-    	_.forEach(this.config.routes, (routePath) => {
-    		// eslint-disable-next-line no-console
-    		console.info(routePath);
-    		const routeClass = require(path.resolve(routePath));
-    		// eslint-disable-next-line no-console
-    		console.info('make it');
-    		const initializedClass = new routeClass();
-
-    		if (initializedClass.routerV1) {
-    			router.use('', initializedClass.routerV1);
-    		}
-    		if (initializedClass.routerV1) {
-    			router.use('', initializedClass.routerV2);
-    		}
-    	});
+    	const coreRoutes = new CoreRoutes();
+    	router.use('', coreRoutes.router);
 
     	this.app.use('/api/', router);
     }

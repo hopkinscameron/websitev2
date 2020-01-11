@@ -1,24 +1,14 @@
-import express from 'express';
+import { Request, Response } from 'express';
 
 /** The core controller */
-export class CoreController {
+export default class CoreController {
 	/**
      * Checks the heath of the server
-     * @param {express.Request} _req the request from the client
-     * @param {express.Request} res response tp the client
-     * @returns {Promise<any>} Promise to the response
+     * @param {Request} _req the request from the client
+     * @param {Response} res response tp the client
+     * @returns {Response} The response
      */
-	healthCheck(_req: express.Request, res: express.Response): Promise<any> {
+	healthCheck(_req: Request, res: Response): Response {
 		return res.json({ message: 'Everything is okay' });
-	}
-
-	/**
-     * Checks the heath of the server
-     * @param {express.Request} _req the request from the client
-     * @param {express.Request} res response tp the client
-     * @returns {Promise<any>} Promise to the response
-     */
-	healthCheckV2(_req: express.Request, res: express.Response): Promise<any> {
-		return res.json({ message: 'Everything is okay, part 2' });
 	}
 }

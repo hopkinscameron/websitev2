@@ -1,7 +1,7 @@
 import express from 'express';
 
 /** Express configuration */
-export interface IExpress {
+export default interface IExpress {
     /** The express application */
     app: express.Application;
 }

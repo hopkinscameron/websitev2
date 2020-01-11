@@ -1,7 +1,7 @@
-import { ConfigModel } from './models/config.model';
+import ConfigModel from './models/config.model';
 
 /** Server configuration settings class that will handle the setup/retrieval of configurations */
-export interface IConfig {
+export default interface IConfig {
     /** The configuration settings */
     config: ConfigModel;
     /** The globbed route files */

@@ -1,12 +1,12 @@
 import * as dotenv from 'dotenv';
 
-import { ConfigModel } from './models/config.model';
-import { IConfig } from './iconfig';
+import ConfigModel from './models/config.model';
+import IConfig from './iconfig';
 import _ from 'lodash';
 import glob from 'glob';
 
 /** @inheritdoc */
-export class Config implements IConfig {
+export default class Config implements IConfig {
     /** @inheritdoc */
     readonly config = new ConfigModel();
     /** @inheritdoc */
