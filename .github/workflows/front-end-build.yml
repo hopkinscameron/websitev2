@@ -17,27 +17,51 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install
+    - name: (client) npm install
       working-directory: ./client
       run: |
         npm ci
       env:
         CI: true
-    - name: check tests
+    - name: (client) check tests
       working-directory: ./client
       run: |
         npm run test
       env:
         CI: true
-    - name: check lint
+    - name: (client) check lint
       working-directory: ./client
       run: |
         npm run lint
       env:
         CI: true
-    - name: build --prod
+    - name: (client) build --prod
       working-directory: ./client
       run: |
         npm run build-prod
+      env:
+        CI: true
+    - name: (server) npm install
+      working-directory: ./server
+      run: |
+        npm ci
+      env:
+        CI: true
+    - name: (server) check tests
+      working-directory: ./server
+      run: |
+        npm run test
+      env:
+        CI: true
+    - name: (server) check lint
+      working-directory: ./server
+      run: |
+        npm run lint
+      env:
+        CI: true
+    - name: (server) build-ts
+      working-directory: ./server
+      run: |
+        npm run build-ts
       env:
         CI: true

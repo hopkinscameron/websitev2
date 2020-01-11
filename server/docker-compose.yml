@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  app:
+    build: ./
+    image: website
+    expose:
+      - 4040
+    environment:
+      NODE_ENV: production
+      PORT: 4040
+      FRONTEND: angular
+      VERSION: 2.0.0
+    restart: always
