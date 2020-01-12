@@ -35,7 +35,8 @@ module.exports = {
                     'requireLast': false
                 }
             }
-        ],
+		],
+		'@typescript-eslint/explicit-function-return-type': ['error', { 'allowExpressions': true }],
         '@typescript-eslint/member-ordering': 'error',
         '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
@@ -66,7 +67,7 @@ module.exports = {
         'dot-location': ['error', 'property'],
         'dot-notation': 'error',
         'eol-last': ['error', 'always'],
-        'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
+		'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
         'guard-for-in': 'error',
         'id-blacklist': [
             'error',
