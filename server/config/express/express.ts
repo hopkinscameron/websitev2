@@ -51,20 +51,14 @@ export default class Express implements IExpress {
     	this.initMiddleware();
     }
 
-    /**
-     * Initializes the logger
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the logger */
     private initLogger(): void {
     	if (this.config.config.env === 'development') {
     		this.app.use(logger('dev'));
     	}
     }
 
-    /**
-     * Initializes the file server
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the file server */
     private initFileServer(): void {
     	// serve the files
     	this.app.use(express.static(path.join(__dirname, this.distDirectory)));
@@ -73,10 +67,7 @@ export default class Express implements IExpress {
     	// });
     }
 
-    /**
-     * Initializes the body parser
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the body parser */
     private initBodyParser(): void {
     	// setup body parser
     	this.app.use(bodyParser.json());
@@ -87,10 +78,7 @@ export default class Express implements IExpress {
     	this.app.use(methodOverride());
     }
 
-    /**
-     * Initializes the routes
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the routes */
     private initRoutes(): void {
     	// init swagger
     	this.initSwagger();
@@ -102,10 +90,7 @@ export default class Express implements IExpress {
     	this.app.use('/api/', router);
     }
 
-    /**
-     * Initializes swagger
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes swagger */
     private initSwagger(): void {
     	const options = {
     		definition: {
@@ -135,10 +120,7 @@ export default class Express implements IExpress {
     	this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
     }
 
-    /**
-     * Initializes the middleware
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the middleware */
     private initMiddleware(): void {
     	// catch 404 and forward to error handler
     	this.app.use((_req: any, _res: any, next: any) => {

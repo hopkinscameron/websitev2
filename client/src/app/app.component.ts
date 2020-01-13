@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
  * This is where all content will be loaded for the application
  */
 export class AppComponent {
-  title = 'client';
+  	title = 'Cameron Hopkins';
 }
