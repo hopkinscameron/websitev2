@@ -98,7 +98,7 @@ export default class Express implements IExpress {
     			info: {
     				title: 'REST API for my website',
     				version: this.config.config.version,
-    				description: 'This is the REST API for my website',
+    				description: 'This is the REST API for my website'
     			},
     			servers: [
     				{
