@@ -21,10 +21,7 @@ export default class Config implements IConfig {
     	this.routes = this.getGlobbedPaths(['**/*.routes.ts']);
     }
 
-    /**
-     * Initializes the environment configurations
-     * @returns {void} nothing to be returned
-     */
+    /** Initializes the environment configurations */
     private initEnvironment(): void {
     	dotenv.config();
 

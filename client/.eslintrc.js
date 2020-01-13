@@ -35,7 +35,8 @@ module.exports = {
                     'requireLast': false
                 }
             }
-        ],
+		],
+		'@typescript-eslint/explicit-function-return-type': ['error', { 'allowExpressions': true }],
         '@typescript-eslint/member-ordering': 'error',
         '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
@@ -56,7 +57,7 @@ module.exports = {
         'arrow-spacing': 'error',
         'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
         'camelcase': 'error',
-        'comma-dangle': 'off',
+        'comma-dangle': ['error', 'never'],
         'comma-spacing': 'error',
         'complexity': ['error', 10],
         'constructor-super': 'error',
@@ -66,7 +67,7 @@ module.exports = {
         'dot-location': ['error', 'property'],
         'dot-notation': 'error',
         'eol-last': ['error', 'always'],
-        'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
+		'eqeqeq': ['error', 'always', { 'null': 'ignore' }],
         'guard-for-in': 'error',
         'id-blacklist': [
             'error',
@@ -140,7 +141,7 @@ module.exports = {
         'spaced-comment': ['error', 'always'],
         'space-in-parens': ['error', 'never'],
 		'use-isnan': 'error',
-		'valid-jsdoc': 'error',
+		'valid-jsdoc': ['error', { 'requireParamType': true, 'requireParamDescription': true, 'requireReturn': false, 'requireReturnDescription': true }],
         'valid-typeof': 'off'
     }
 };

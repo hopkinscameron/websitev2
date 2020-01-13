@@ -56,7 +56,7 @@ module.exports = {
         'arrow-spacing': 'error',
         'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
         'camelcase': 'error',
-        'comma-dangle': 'off',
+        'comma-dangle': ['error', 'never'],
         'comma-spacing': 'error',
         'complexity': ['error', 10],
         'constructor-super': 'error',
@@ -140,7 +140,7 @@ module.exports = {
         'spaced-comment': ['error', 'always'],
         'space-in-parens': ['error', 'never'],
 		'use-isnan': 'error',
-		'valid-jsdoc': 'error',
+		'valid-jsdoc': ['error', { 'requireParamType': true, 'requireParamDescription': true, 'requireReturn': false, 'requireReturnDescription': true }],
         'valid-typeof': 'off'
     }
 };
