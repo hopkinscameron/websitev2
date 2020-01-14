@@ -87,7 +87,7 @@ module.exports = {
         'key-spacing': 'error',
         'keyword-spacing': 'error',
         'max-classes-per-file': 'off',
-        'max-len': ['error', { 'code': 140 }],
+        'max-len': ['error', { 'code': 160 }],
         'max-statements': ['error', 20],
         'new-parens': 'error',
         'no-bitwise': 'error',

@@ -5,4 +5,6 @@ export default class ConfigModel {
     port: string;
     frontEnd: string;
     version: string;
+    mongoUri: string;
+    mongoDebug: boolean;
 }
