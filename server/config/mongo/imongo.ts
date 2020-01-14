@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
+
 /** Mongo configuration */
 export default interface IMongo {
     /** Sets up a connection to mongodb */
-    connect(): Promise<void>;
+    connect(): Promise<typeof mongoose>;
 }

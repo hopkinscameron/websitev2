@@ -10,13 +10,13 @@ export default class Mongo implements IMongo {
     private debug = new Debug('express-mongoose-es6-rest-api:index');
 
     /** @inheritdoc */
-    connect(): Promise<void> {
+    connect(): Promise<typeof mongoose> {
     	if (this.config.config.mongoDebug) {
     		mongoose.set('debug', (collectionName, method, query, doc) => {
     			this.debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
     		});
     	}
 
-    	return mongoose.connect(this.config.config.mongoUri, { keepAlive: 1, useNewUrlParser: true, useUnifiedTopology: true });
+    	return mongoose.connect(this.config.config.mongoUri, { keepAlive: true, useNewUrlParser: true, useUnifiedTopology: true });
     }
 }
