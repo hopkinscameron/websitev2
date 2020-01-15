@@ -21,9 +21,24 @@ export default class AboutRoutes {
          *       200:
          *         description: Returns the data associated with the about page
          *         schema:
-         *           type: string
+         *           $ref: '#/definitions/FavoriteGameModel'
+         *   post:
+         *     description: Create a new about with the data passed to the body
+         *     produces:
+         *      - application/json
+         *     responses:
+         *       200:
+         *         description: Returns the latest data associated with the about page
+         *         schema:
+         *           $ref: '#/definitions/FavoriteGameModel'
          */
     	this.router.route('/v1/about')
     		.get(this.aboutController.getAboutInfo);
+
+    	this.router.route('/v1/about')
+    		.post(this.aboutController.createAboutInfo);
+
+    	// bind the middleware
+    	this.router.param('aboutId', this.aboutController.aboutById);
     }
 }

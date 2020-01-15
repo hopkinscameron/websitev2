@@ -44,4 +44,4 @@ export class AboutModel implements IAboutModel {
 }
 
 /** About Mongo Schema Model */
-export const About: Model<IAboutDocument> = model<IAboutDocument>('About', schema);
+export const Abouts: Model<IAboutDocument> = model<IAboutDocument>('Abouts', schema);

@@ -1,5 +1,6 @@
 import * as path from 'path';
 
+import AboutRoutes from '../../app/about/about.routes';
 import Config from '../configuration/config';
 import CoreRoutes from '../../app/core/core.routes';
 import IExpress from './iexpress';
@@ -84,8 +85,8 @@ export default class Express implements IExpress {
     	this.initSwagger();
 
     	const router = express.Router();
-    	const coreRoutes = new CoreRoutes();
-    	router.use('', coreRoutes.router);
+    	router.use('', new CoreRoutes().router);
+    	router.use('', new AboutRoutes().router);
 
     	this.app.use('/api/', router);
     }
