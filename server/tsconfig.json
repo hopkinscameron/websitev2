@@ -34,6 +34,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
-  "include": ["**.ts", "config/**/*", "app/**/*", "index.js"],
+  "include": ["**.ts", "config/**/*", "app/**/*", "helpers/**/*", "index.js"],
   "exclude": ["node_modules", "dist/**/*", "start.js"]
 }
