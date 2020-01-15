@@ -14,18 +14,19 @@ const schema = new Schema({
 /**
  * The about model
  * @swagger
- * definitions:
- *   AboutModel:
- *     properties:
- *       bio:
- *         type: string
- *       hobbies:
- *         type: string
- *       favoriteGames:
- *         type: array
- *         items:
- *           schema:
- *             $ref: '#/definitions/FavoriteGameModel'
+ * components:
+ *   schemas:
+ *     AboutModel:
+ *       properties:
+ *         bio:
+ *           type: string
+ *         hobbies:
+ *           type: string
+ *         favoriteGames:
+ *           type: array
+ *           items:
+ *             schema:
+ *               $ref: '#/definitions/FavoriteGameModel'
  */
 export interface IAboutModel {
     bio: string;

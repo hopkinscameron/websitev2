@@ -8,13 +8,14 @@ const schema = new Schema({
 /**
  * The favorite game model
  * @swagger
- * definitions:
- *   FavoriteGameModel:
- *     properties:
- *       category:
- *         type: string
- *       game:
- *         type: string
+ * components:
+ *   schemas:
+ *     FavoriteGameModel:
+ *       properties:
+ *         category:
+ *           type: string
+ *         game:
+ *           type: string
  */
 export interface IFavoriteGameModel {
     category: string;
