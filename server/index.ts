@@ -1,6 +1,7 @@
-import CommonFunctions from './helpers/common-functions';
 /* eslint-disable max-statements */
 /* eslint-disable no-console */
+
+import CommonFunctions from './helpers/common-functions';
 import Config from './config/configuration/config';
 import Express from './config/express/express';
 import IConfig from './config/configuration/iconfig';
@@ -15,18 +16,19 @@ let mongo: IMongo;
 const lineBreak = '------------------------';
 start();
 
-
 /** Starts the server */
 async function start(): Promise<void> {
+	const totalTime = new Date();
+
 	try {
 		console.log(lineBreak);
 		console.log(clc.cyan('Configuring the environment'));
-		let startDateTime = new Date();
+
+		let startDateTime = new Date(totalTime);
 
 		config = new Config();
 
-		let endDateTime = new Date();
-		console.log(clc.green(`Environment configured successfully (took ${CommonFunctions.timeDifference(startDateTime, endDateTime)})`));
+		console.log(clc.green(`Environment configured successfully (took ${CommonFunctions.timeDifference(startDateTime, new Date())})`));
 		console.log(lineBreak);
 		startDateTime = new Date();
 
@@ -35,8 +37,7 @@ async function start(): Promise<void> {
 
 		express = new Express();
 
-		endDateTime = new Date();
-		console.log(clc.green(`Express configured successfully (took ${CommonFunctions.timeDifference(startDateTime, endDateTime)})`));
+		console.log(clc.green(`Express configured successfully (took ${CommonFunctions.timeDifference(startDateTime, new Date())})`));
 		console.log(lineBreak);
 
 		console.log(lineBreak);
@@ -45,8 +46,7 @@ async function start(): Promise<void> {
 
 		mongo = new Mongo();
 
-		endDateTime = new Date();
-		console.log(clc.green(`Mongo configured successfully (took ${CommonFunctions.timeDifference(startDateTime, endDateTime)})`));
+		console.log(clc.green(`Mongo configured successfully (took ${CommonFunctions.timeDifference(startDateTime, new Date())})`));
 		console.log(lineBreak);
 	} catch (err) {
 		console.error(err);
@@ -69,6 +69,7 @@ async function start(): Promise<void> {
 
 			express.app.listen(config.config.port, () => {
 				console.log(clc.green(`server started on ${config.config.host}:${config.config.port} (${config.config.env})`));
+				console.log(clc.yellow(`It took the server ${CommonFunctions.timeDifference(totalTime, new Date())} to start.`));
 			});
 		} catch (err) {
 			console.error(err);

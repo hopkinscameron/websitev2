@@ -1,5 +1,6 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
+import CommonFunctions from '../../../helpers/common-functions';
 import { IFavoriteGameModel } from './favorite-game.model';
 
 const schema = new Schema({
@@ -7,9 +8,14 @@ const schema = new Schema({
 	hobbies: { type: [String] },
 	favoriteGames: [{
 		type: Schema.Types.ObjectId,
-		ref: 'FavoriteGame'
+		ref: 'FavoriteGames'
 	}]
 });
+
+if (!schema['options'].toObject) schema['options'].toObject = {};
+schema.set('toObject', { versionKey: false });
+schema.set('toObject', { versionKey: false });
+schema['options'].toObject.transform = CommonFunctions.transformModel;
 
 /**
  * The about model

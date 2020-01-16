@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
+
 moment().format();
 
 /** Common helper functions */
@@ -43,4 +44,26 @@ export default class CommonFunctions {
 
 		return diffStr;
 	}
+
+	/**
+     * Gets the time difference in a string format between two dates
+     * @param {any} _doc the document
+     * @param {any} ret the model
+	 * @param {any} options the options for the transformation
+     * @returns {any} The model
+     */
+	static transformModel(_doc: any, ret: any, options: any): any {
+		ret.id = ret._id;
+
+		// always delete id
+		delete ret['_id'];
+
+		if (options.hide) {
+			_.forEach(options.hide.split(' '), (prop) => {
+				delete ret[prop];
+			});
+		}
+
+		return ret;
+	};
 }

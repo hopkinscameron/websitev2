@@ -1,9 +1,16 @@
-import { Document, Model, Schema, model } from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
+
+import CommonFunctions from '../../../helpers/common-functions';
 
 const schema = new Schema({
 	category: { required: true, type: String },
 	game: { required: true, type: String }
 });
+
+if (!schema['options'].toObject) schema['options'].toObject = {};
+schema.set('toObject', { versionKey: false });
+schema.set('toObject', { versionKey: false });
+schema['options'].toObject.transform = CommonFunctions.transformModel;
 
 /**
  * The favorite game model
@@ -32,4 +39,4 @@ export class FavoriteGameModel implements IFavoriteGameModel {
 }
 
 /** Favorite Game Mongo Schema Model */
-export const FavoriteGames: Model<IFavoriteGameDocument> = model<IFavoriteGameDocument>('FavoriteGame', schema);
+export const FavoriteGames = model<IFavoriteGameDocument>('FavoriteGames', schema);

@@ -9,9 +9,9 @@ export default class AboutController {
      * Gets the data for the about page
      * @param {Request} req the request from the client
      * @param {Response} res the response to the client
-     * @returns {Promise<Response>} The response
+     * @returns {Promise<AboutModel>} The response
      */
-	async createAboutInfo(req: Request, res: Response): Promise<Response> {
+	async createAboutInfo(req: Request, res: Response): Promise<AboutModel> {
 		await FavoriteGames.insertMany(req.body.favoriteGames);
 		const games = await FavoriteGames.find({});
 		const a = new AboutModel();
@@ -25,11 +25,11 @@ export default class AboutController {
      * Gets the data for the about page
      * @param {Request} req the request from the client
      * @param {Response} res the response to the client
-     * @returns {Response} The response
+     * @returns {AboutModel} The AboutModel by id
      */
-	getAboutInfo(req: Request, res: Response): Response {
+	getAboutInfo(req: Request, res: Response): AboutModel {
 		try {
-			return res.json(req.foundAbout);
+			return res.json(req.foundAbout.toObject());
 		} catch (err) {
 			throw err;
 		}
@@ -39,9 +39,9 @@ export default class AboutController {
      * Updates the data for the about page
      * @param {Request} req the request from the client
      * @param {Response} res the response to the client
-     * @returns {Promise<Response>} The response
+     * @returns {Promise<AboutModel>} The Updated AboutModel
      */
-	async updateAboutInfo(req: Request, res: Response): Promise<Response> {
+	async updateAboutInfo(req: Request, res: Response): Promise<AboutModel> {
 		req.foundAbout.hobbies = req.body.hobbies;
 		req.foundAbout.bio = req.body.bio;
 		return res.json(await req.foundAbout.save());
@@ -53,14 +53,14 @@ export default class AboutController {
      * @param {Response} res the response to the client
 	 * @param {NextFunction} next the callback
 	 * @param {string} id the parameter id
-     * @returns {Promise<any>} The response
+     * @returns {Promise<NextFunction>} The response
      */
-	async aboutById(req: Request, res: Response, next: NextFunction, id: string): Promise<any> {
+	async aboutById(req: Request, res: Response, next: NextFunction, id: string): Promise<NextFunction> {
 		try {
-			const foundAbout = await Abouts.findById(id);
+			const foundAbout = await Abouts.findById(id).populate('favoriteGames').exec();
 
 			if (foundAbout) {
-				req.foundAbout = await foundAbout.populate({ path: 'favoriteGames' });
+				req.foundAbout = foundAbout;
 				return next();
 			}
 
