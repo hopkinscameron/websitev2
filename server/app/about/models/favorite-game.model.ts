@@ -22,8 +22,10 @@ schema['options'].toObject.transform = CommonFunctions.transformModel;
  *       properties:
  *         category:
  *           type: string
+ *           required: true
  *         game:
  *           type: string
+ *           required: true
  */
 export interface IFavoriteGameModel {
     category: string;

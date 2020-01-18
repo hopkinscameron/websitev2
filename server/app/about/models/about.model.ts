@@ -27,6 +27,7 @@ schema['options'].toObject.transform = CommonFunctions.transformModel;
  *       properties:
  *         bio:
  *           type: string
+ *           required: true
  *         hobbies:
  *           type: string
  *         favoriteGames:
@@ -37,8 +38,8 @@ schema['options'].toObject.transform = CommonFunctions.transformModel;
  */
 export interface IAboutModel {
     bio: string;
-    hobbies: string[];
-    favoriteGames: IFavoriteGameModel[];
+    hobbies?: string[];
+    favoriteGames?: IFavoriteGameModel[];
 }
 
 /** @inheritdoc */
@@ -47,8 +48,8 @@ export interface IAboutDocument extends IAboutModel, Document { }
 /** @inheritdoc */
 export class AboutModel implements IAboutModel {
     bio: string;
-    hobbies: string[];
-    favoriteGames: IFavoriteGameModel[];
+    hobbies?: string[];
+    favoriteGames?: IFavoriteGameModel[];
 }
 
 /** About Mongo Schema Model */
