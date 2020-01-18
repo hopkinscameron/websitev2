@@ -18,6 +18,7 @@ schema['options'].toObject.transform = CommonFunctions.transformModel;
  * components:
  *   schemas:
  *     FavoriteGameModel:
+ *       type: object
  *       properties:
  *         category:
  *           type: string

@@ -16,8 +16,11 @@ export default class AboutRoutes {
          * paths:
          *   /v1/about:
          *     post:
+		 *       operationId: createAbout
          *       summary: Create a new AboutModel
-         *
+         *       tags:
+		 *         - about
+		 *
          *       requestBody:
          *         required: true
          *         content:
@@ -29,7 +32,7 @@ export default class AboutRoutes {
          *         '200':
          *           description: Created a new AboutModel
          *           schema:
-         *             $ref: '#/definitions/AboutModel'
+         *             $ref: '#/components/schemas/AboutModel'
          */
     	this.router.route('/v1/about')
     		.post(asyncHandler(this.aboutController.createAboutInfo));
@@ -40,7 +43,10 @@ export default class AboutRoutes {
          *   /v1/about/:id:
          *     get:
          *       summary: Gets the AboutModel by id
-         *
+         *       operationId: getAbout
+		 *       tags:
+		 *         - about
+		 *
          *       parameters:
          *         - in: path
          *           required: true
@@ -52,11 +58,14 @@ export default class AboutRoutes {
          *         '200':
          *           description: Retrieved AboutModel associated with this id
          *           schema:
-         *             $ref: '#/definitions/AboutModel'
+         *             $ref: '#/components/schemas/AboutModel'
          *
          *     post:
          *       summary: Updates the AboutModel
-         *
+         *       operationId: updateAbout
+		 *       tags:
+		 *         - about
+		 *
          *       requestBody:
          *         required: true
          *         content:
@@ -68,7 +77,7 @@ export default class AboutRoutes {
          *         '200':
          *           description: Returns the updated AboutModel
          *           schema:
-         *             $ref: '#/definitions/AboutModel'
+         *             $ref: '#/components/schemas/AboutModel'
          */
     	this.router.route('/v1/about/:id')
     		.get(this.aboutController.getAboutInfo)

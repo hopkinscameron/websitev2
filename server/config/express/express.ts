@@ -9,11 +9,13 @@ import compress from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import { promises as fs } from 'fs';
 import helmet from 'helmet';
 import httpError from 'http-errors';
 import logger from 'morgan';
 import methodOverride from 'method-override';
 import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerOptions from '../swagger/swagger-def';
 import swaggerUi from 'swagger-ui-express';
 
 /** @inheritdoc */
@@ -24,12 +26,13 @@ export default class Express implements IExpress {
     private config = new Config();
     private distDirectory = '../dist/';
 
-    /**
-     * Initializes a new instance of the Express class
-     */
+    /** Initializes a new instance of the Express class */
     constructor() {
     	this.app = express();
+    }
 
+    /** @inheritdoc */
+    async init(): Promise<void> {
     	// init logger
     	this.initLogger();
 
@@ -46,7 +49,7 @@ export default class Express implements IExpress {
     	this.app.use(cors());
 
     	// init routes
-    	this.initRoutes();
+    	await this.initRoutes();
 
     	// init middleware
     	this.initMiddleware();
@@ -80,9 +83,9 @@ export default class Express implements IExpress {
     }
 
     /** Initializes the routes */
-    private initRoutes(): void {
+    private async initRoutes(): Promise<void> {
     	// init swagger
-    	this.initSwagger();
+    	await this.initSwagger();
 
     	const router = express.Router();
     	router.use('', new CoreRoutes().router);
@@ -92,33 +95,38 @@ export default class Express implements IExpress {
     }
 
     /** Initializes swagger */
-    private initSwagger(): void {
-    	const options = {
-    		definition: {
-    			openapi: '3.0.0',
-    			info: {
-    				title: 'REST API for my website',
-    				version: this.config.config.version,
-    				description: 'This is the REST API for my website'
-    			},
-    			servers: [
-    				{
-    					url: `{scheme}://${this.config.config.host}:{port}/{basePath}`,
-    					description: 'The development API server',
-    					variables: {
-    						scheme: { default: 'http' },
-    						port: { default: this.config.config.port },
-    						basePath: { default: 'api' }
-    					}
-    				}
-    			],
-    			consumes: ['application/json'],
-    			produces: ['application/json']
-    		},
-    		apis: ['**/*.ts']
-    	};
+    private async initSwagger(): Promise<void> {
+    	// const options = {
+    	// 	definition: {
+    	// 		openapi: '3.0.0',
+    	// 		info: {
+    	// 			title: 'REST API for my website',
+    	// 			version: this.config.config.version,
+    	// 			description: 'This is the REST API for my website'
+    	// 		},
+    	// 		servers: [
+    	// 			{
+    	// 				url: `{scheme}://${this.config.config.host}:{port}/{basePath}`,
+    	// 				description: 'The development API server',
+    	// 				variables: {
+    	// 					scheme: { default: 'http' },
+    	// 					port: { default: this.config.config.port },
+    	// 					basePath: { default: 'api' }
+    	// 				}
+    	// 			}
+    	// 		],
+    	// 		consumes: ['application/json'],
+    	// 		produces: ['application/json']
+    	// 	},
+    	// 	apis: ['**/*.ts']
+    	// };
 
-    	this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)));
+    	// we want to save the swagger spec to a file so the generator can use this to create the client side apis
+    	const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+    	await fs.writeFile(`${process.cwd()}/swagger-api-spec.json`, JSON.stringify(swaggerSpec));
+
+    	this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     }
 
     /** Initializes the middleware */

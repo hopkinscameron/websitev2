@@ -18,7 +18,8 @@ export default class AboutController {
 		a.favoriteGames = games;
 		a.hobbies = req.body.hobbies;
 		a.bio = req.body.bio;
-		return res.json(await Abouts.create(a));
+		req.foundAbout = await Abouts.create(a);
+		return this.getAboutInfo(req, res);
 	}
 
 	/**
