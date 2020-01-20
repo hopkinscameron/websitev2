@@ -1,1 +1,170 @@
-{"openapi":"3.0.0","info":{"title":"REST API for my website","version":"2.0.0","description":"This is the REST API for my website"},"servers":[{"url":"{scheme}://localhost:{port}/{basePath}","description":"The development API server","variables":{"scheme":{"default":"http"},"port":{"default":"4040"},"basePath":{"default":"api"}}}],"consumes":["application/json"],"produces":["application/json"],"paths":{"/v1/about":{"post":{"operationId":"createAbout","summary":"Create a new AboutModel","tags":["about"],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AboutModel"}}}},"responses":{"200":{"description":"Created a new AboutModel","schema":{"$ref":"#/components/schemas/AboutModel"}}}}},"/v1/about/:id":{"get":{"summary":"Gets the AboutModel by id","operationId":"getAbout","tags":["about"],"parameters":[{"in":"path","required":true,"schema":{"type":"string"},"description":"The AboutModel id"}],"responses":{"200":{"description":"Retrieved AboutModel associated with this id","schema":{"$ref":"#/components/schemas/AboutModel"}}}},"post":{"summary":"Updates the AboutModel","operationId":"updateAbout","tags":["about"],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AboutModel"}}}},"responses":{"200":{"description":"Returns the updated AboutModel","schema":{"$ref":"#/components/schemas/AboutModel"}}}}},"/v1/health-check":{"get":{"summary":"Checks the state of the server","responses":{"200":{"description":"Healthy server"}}}}},"components":{"schemas":{"AboutModel":{"type":"object","properties":{"bio":{"type":"string"},"hobbies":{"type":"string"},"favoriteGames":{"type":"array","items":{"schema":{"$ref":"#/components/schemas/FavoriteGameModel"}}}}},"FavoriteGameModel":{"type":"object","properties":{"category":{"type":"string"},"game":{"type":"string"}}}}},"tags":[]}
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "REST API for my website",
+    "version": "1.0.0",
+    "description": "This is the REST API for my website"
+  },
+  "servers": [
+    {
+      "url": "{scheme}://${config.config.host}:{port}/{basePath}",
+      "description": "The development API server",
+      "variables": {
+        "scheme": {
+          "default": "http"
+        },
+        "port": {
+          "default": "4040"
+        },
+        "basePath": {
+          "default": "api"
+        }
+      }
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/about": {
+      "post": {
+        "operationId": "createAbout",
+        "summary": "Create a new AboutModel",
+        "tags": [
+          "about"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AboutModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created a new AboutModel",
+            "schema": {
+              "$ref": "#/components/schemas/AboutModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/about/:id": {
+      "get": {
+        "summary": "Gets the AboutModel by id",
+        "operationId": "getAbout",
+        "tags": [
+          "about"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The AboutModel id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved AboutModel associated with this id",
+            "schema": {
+              "$ref": "#/components/schemas/AboutModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Updates the AboutModel",
+        "operationId": "updateAbout",
+        "tags": [
+          "about"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The AboutModel id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AboutModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated AboutModel",
+            "schema": {
+              "$ref": "#/components/schemas/AboutModel"
+            }
+          }
+        }
+      }
+    },
+    "/v1/health-check": {
+      "get": {
+        "summary": "Checks the state of the server",
+        "responses": {
+          "200": {
+            "description": "Healthy server"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AboutModel": {
+        "type": "object",
+        "properties": {
+          "bio": {
+            "type": "string",
+            "required": true
+          },
+          "hobbies": {
+            "type": "string"
+          },
+          "favoriteGames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FavoriteGameModel"
+            }
+          }
+        }
+      },
+      "FavoriteGameModel": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "required": true
+          },
+          "game": {
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

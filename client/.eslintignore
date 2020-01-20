@@ -1,4 +1,5 @@
 /src/main.ts
 /src/polyfills.ts
 /src/test.ts
+/src/app/api/**/*
 /node_modules

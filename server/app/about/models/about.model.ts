@@ -33,8 +33,7 @@ schema['options'].toObject.transform = CommonFunctions.transformModel;
  *         favoriteGames:
  *           type: array
  *           items:
- *             schema:
- *               $ref: '#/components/schemas/FavoriteGameModel'
+ *             $ref: '#/components/schemas/FavoriteGameModel'
  */
 export interface IAboutModel {
     bio: string;

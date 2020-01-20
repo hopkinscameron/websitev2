@@ -12,15 +12,15 @@ export default class AboutRoutes {
     /** Initializes a new instance of the AboutRoutes class */
     constructor() {
     	/**
-     * @swagger
-     * paths:
-     *   /v1/about:
-     *     post:
-     *       operationId: createAbout
-          *       summary: Create a new AboutModel
-          *       tags:
-          *         - about
-          *
+		 * @swagger
+		 * paths:
+		 *   /v1/about:
+		 *     post:
+		 *       operationId: createAbout
+         *       summary: Create a new AboutModel
+         *       tags:
+         *         - about
+         *
          *       requestBody:
          *         required: true
          *         content:
@@ -44,16 +44,16 @@ export default class AboutRoutes {
          *     get:
          *       summary: Gets the AboutModel by id
          *       operationId: getAbout
-	    *       tags:
-	    *         about
-	    *
+	     *       tags:
+	     *         - about
+	     *
          *       parameters:
-         *         in: path
-         *         required: true
-         *         name: id
-         *         schema:
-         *           type: string
-         *         description: The AboutModel id
+         *         - name: id
+         *           in: path
+         *           required: true
+         *           schema:
+         *             type: string
+         *           description: The AboutModel id
          *
          *       responses:
          *         '200':
@@ -68,12 +68,12 @@ export default class AboutRoutes {
 		 *         - about
 		 *
          *       parameters:
-         *         in: path
-         *         required: true
-         *         name: id
-         *         schema:
-         *           type: string
-         *         description: The AboutModel id
+         *         - name: id
+         *           in: path
+         *           required: true
+         *           schema:
+         *             type: string
+         *           description: The AboutModel id
          *
          *       requestBody:
          *         required: true
