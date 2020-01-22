@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AboutService } from './services/about.service';
-import { ApiService } from './services/api.service';
+import { HealthCheckService } from './services/health-check.service';
 
 /**
  * Module that provides all services and configuration.
@@ -15,7 +15,7 @@ import { ApiService } from './services/api.service';
   declarations: [],
   providers: [
     AboutService,
-    ApiService,
+    HealthCheckService,
     ApiConfiguration
   ],
 })

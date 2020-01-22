@@ -14,8 +14,7 @@ import helmet from 'helmet';
 import httpError from 'http-errors';
 import logger from 'morgan';
 import methodOverride from 'method-override';
-import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerOptions from '../swagger/swagger-def';
+import swaggerDefinition from '../swagger/swagger-def';
 import swaggerUi from 'swagger-ui-express';
 
 /** @inheritdoc */
@@ -96,37 +95,10 @@ export default class Express implements IExpress {
 
     /** Initializes swagger */
     private async initSwagger(): Promise<void> {
-    	// const options = {
-    	// 	definition: {
-    	// 		openapi: '3.0.0',
-    	// 		info: {
-    	// 			title: 'REST API for my website',
-    	// 			version: this.config.config.version,
-    	// 			description: 'This is the REST API for my website'
-    	// 		},
-    	// 		servers: [
-    	// 			{
-    	// 				url: `{scheme}://${this.config.config.host}:{port}/{basePath}`,
-    	// 				description: 'The development API server',
-    	// 				variables: {
-    	// 					scheme: { default: 'http' },
-    	// 					port: { default: this.config.config.port },
-    	// 					basePath: { default: 'api' }
-    	// 				}
-    	// 			}
-    	// 		],
-    	// 		consumes: ['application/json'],
-    	// 		produces: ['application/json']
-    	// 	},
-    	// 	apis: ['**/*.ts']
-    	// };
-
     	// we want to save the swagger spec to a file so the generator can use this to create the client side apis
-    	const swaggerSpec = swaggerJSDoc(swaggerOptions);
+    	await fs.writeFile(`${process.cwd()}/swagger-api-spec.json`, JSON.stringify(swaggerDefinition));
 
-    	await fs.writeFile(`${process.cwd()}/swagger-api-spec.json`, JSON.stringify(swaggerSpec));
-
-    	this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    	this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
     }
 
     /** Initializes the middleware */

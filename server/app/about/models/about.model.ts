@@ -1,6 +1,6 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
-import CommonFunctions from '../../../helpers/common-functions';
+import CommonFunctions from '../../../shared/helpers/common-functions';
 import { IFavoriteGameModel } from './favorite-game.model';
 
 const schema = new Schema({
@@ -10,31 +10,14 @@ const schema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'FavoriteGames'
 	}]
-});
+}, { timestamps: true });
 
 if (!schema['options'].toObject) schema['options'].toObject = {};
 schema.set('toObject', { versionKey: false });
 schema.set('toObject', { versionKey: false });
 schema['options'].toObject.transform = CommonFunctions.transformModel;
 
-/**
- * The about model
- * @swagger
- * components:
- *   schemas:
- *     AboutModel:
- *       type: object
- *       properties:
- *         bio:
- *           type: string
- *           required: true
- *         hobbies:
- *           type: string
- *         favoriteGames:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/FavoriteGameModel'
- */
+/** The about model */
 export interface IAboutModel {
     bio: string;
     hobbies?: string[];

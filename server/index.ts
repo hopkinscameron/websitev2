@@ -1,7 +1,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable no-console */
 
-import CommonFunctions from './helpers/common-functions';
+import CommonFunctions from './shared/helpers/common-functions';
 import Config from './config/configuration/config';
 import Express from './config/express/express';
 import IConfig from './config/configuration/iconfig';

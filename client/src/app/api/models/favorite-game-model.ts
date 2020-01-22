@@ -1,5 +1,5 @@
 /* tslint:disable */
 export interface FavoriteGameModel {
-  category?: string;
-  game?: string;
+  category: string;
+  game: string;
 }

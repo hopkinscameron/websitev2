@@ -1,7 +1,9 @@
 import { AboutModel, Abouts } from './models/about.model';
+import { DateSortModel, IDateSortModel } from '../../shared/models/date-sort.model';
 import { NextFunction, Request, Response } from 'express';
 
 import { FavoriteGames } from './models/favorite-game.model';
+import _ from 'lodash';
 
 /** The about controller */
 export default class AboutController {
@@ -20,6 +22,31 @@ export default class AboutController {
 		a.bio = req.body.bio;
 		req.foundAbout = await Abouts.create(a);
 		return this.getAboutInfo(req, res);
+	}
+
+	/**
+     * Gets the latest data for the about page
+     * @param {Request} req the request from the client
+     * @param {Response} res the response to the client
+     * @returns {Promise<AboutModel>} The latest AboutModel
+     */
+	async getLatestAboutInfo(req: Request, res: Response): Promise<AboutModel> {
+		try {
+			const sortBy: IDateSortModel = new DateSortModel();
+			sortBy.updatedAt = 1;
+
+			if (_.toLower(req.query.by) === 'created') {
+				sortBy.createdAt = 1;
+				sortBy.updatedAt = null;
+			}
+
+			const foundAbouts = await Abouts.find({ }).sort(sortBy).limit(1).populate('favoriteGames').exec();
+			const foundAbout = foundAbouts ? foundAbouts[0].toObject() : null;
+
+			return res.json(foundAbout);
+		} catch (err) {
+			throw err;
+		}
 	}
 
 	/**

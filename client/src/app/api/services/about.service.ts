@@ -35,7 +35,7 @@ export class AboutService extends BaseService {
   createAbout$Response(params: {
 
     body: AboutModel
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<AboutModel>> {
 
     const rb = new RequestBuilder(this.rootUrl, AboutService.CreateAboutPath, 'post');
     if (params) {
@@ -44,12 +44,12 @@ export class AboutService extends BaseService {
       rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<AboutModel>;
       })
     );
   }
@@ -63,10 +63,67 @@ export class AboutService extends BaseService {
   createAbout(params: {
 
     body: AboutModel
-  }): Observable<void> {
+  }): Observable<AboutModel> {
 
     return this.createAbout$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<AboutModel>) => r.body as AboutModel)
+    );
+  }
+
+  /**
+   * Path part for operation getLatestAbout
+   */
+  static readonly GetLatestAboutPath = '/v1/about/latest';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getLatestAbout()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getLatestAbout$Response(params?: {
+
+    /**
+     * Latest by either created date or last updated
+     */
+    by?: 'created' | 'updated';
+
+  }): Observable<StrictHttpResponse<AboutModel>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AboutService.GetLatestAboutPath, 'get');
+    if (params) {
+
+      rb.query('by', params.by);
+
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<AboutModel>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `getLatestAbout$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getLatestAbout(params?: {
+
+    /**
+     * Latest by either created date or last updated
+     */
+    by?: 'created' | 'updated';
+
+  }): Observable<AboutModel> {
+
+    return this.getLatestAbout$Response(params).pipe(
+      map((r: StrictHttpResponse<AboutModel>) => r.body as AboutModel)
     );
   }
 
@@ -88,7 +145,7 @@ export class AboutService extends BaseService {
      */
     id: string;
 
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<AboutModel>> {
 
     const rb = new RequestBuilder(this.rootUrl, AboutService.GetAboutPath, 'get');
     if (params) {
@@ -97,12 +154,12 @@ export class AboutService extends BaseService {
 
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<AboutModel>;
       })
     );
   }
@@ -120,10 +177,10 @@ export class AboutService extends BaseService {
      */
     id: string;
 
-  }): Observable<void> {
+  }): Observable<AboutModel> {
 
     return this.getAbout$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<AboutModel>) => r.body as AboutModel)
     );
   }
 
@@ -146,7 +203,7 @@ export class AboutService extends BaseService {
     id: string;
 
     body: AboutModel
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<AboutModel>> {
 
     const rb = new RequestBuilder(this.rootUrl, AboutService.UpdateAboutPath, 'post');
     if (params) {
@@ -156,12 +213,12 @@ export class AboutService extends BaseService {
       rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<AboutModel>;
       })
     );
   }
@@ -180,10 +237,10 @@ export class AboutService extends BaseService {
     id: string;
 
     body: AboutModel
-  }): Observable<void> {
+  }): Observable<AboutModel> {
 
     return this.updateAbout$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<AboutModel>) => r.body as AboutModel)
     );
   }
 

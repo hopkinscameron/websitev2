@@ -1,32 +1,18 @@
 import { Document, Schema, model } from 'mongoose';
 
-import CommonFunctions from '../../../helpers/common-functions';
+import CommonFunctions from '../../../shared/helpers/common-functions';
 
 const schema = new Schema({
 	category: { required: true, type: String },
 	game: { required: true, type: String }
-});
+}, { timestamps: true });
 
 if (!schema['options'].toObject) schema['options'].toObject = {};
 schema.set('toObject', { versionKey: false });
 schema.set('toObject', { versionKey: false });
 schema['options'].toObject.transform = CommonFunctions.transformModel;
 
-/**
- * The favorite game model
- * @swagger
- * components:
- *   schemas:
- *     FavoriteGameModel:
- *       type: object
- *       properties:
- *         category:
- *           type: string
- *           required: true
- *         game:
- *           type: string
- *           required: true
- */
+/** The favorite game model */
 export interface IFavoriteGameModel {
     category: string;
     game: string;

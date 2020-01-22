@@ -12,7 +12,7 @@ import { map, filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService extends BaseService {
+export class HealthCheckService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -21,48 +21,48 @@ export class ApiService extends BaseService {
   }
 
   /**
-   * Path part for operation v1HealthCheckGet
+   * Path part for operation checkHealth
    */
-  static readonly V1HealthCheckGetPath = '/v1/health-check';
+  static readonly CheckHealthPath = '/v1/health-check';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `v1HealthCheckGet()` instead.
+   * To access only the response body, use `checkHealth()` instead.
    *
    * This method doesn't expect any request body.
    */
-  v1HealthCheckGet$Response(params?: {
+  checkHealth$Response(params?: {
 
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<string>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ApiService.V1HealthCheckGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, HealthCheckService.CheckHealthPath, 'get');
     if (params) {
 
 
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<string>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `v1HealthCheckGet$Response()` instead.
+   * To access the full response (for headers, for example), `checkHealth$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  v1HealthCheckGet(params?: {
+  checkHealth(params?: {
 
-  }): Observable<void> {
+  }): Observable<string> {
 
-    return this.v1HealthCheckGet$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.checkHealth$Response(params).pipe(
+      map((r: StrictHttpResponse<string>) => r.body as string)
     );
   }
 

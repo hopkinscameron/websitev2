@@ -10,17 +10,6 @@ export default class CoreRoutes {
 
     /** Initializes a new instance of the CoreRoutes class */
     constructor() {
-    	/**
-         * @swagger
-         * paths:
-         *   /v1/health-check:
-         *     get:
-         *       summary: Checks the state of the server
-         *
-         *       responses:
-         *         '200':
-         *           description: Healthy server
-         */
     	this.router.route('/v1/health-check')
     		.get(this.coreController.healthCheck);
     }

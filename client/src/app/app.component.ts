@@ -9,6 +9,4 @@ import { Component } from '@angular/core';
  * The main application component.
  * This is where all content will be loaded for the application
  */
-export class AppComponent {
-  	title = 'Cameron Hopkins';
-}
+export class AppComponent { }

@@ -1,2 +1,2 @@
 export { AboutService } from './services/about.service';
-export { ApiService } from './services/api.service';
+export { HealthCheckService } from './services/health-check.service';
