@@ -9,6 +9,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { HeaderComponent } from './core/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { PageTitleSharedModule } from '../shared/page-title/page-title.module';
 import { RouterModule } from '@angular/router';
 import { environment } from 'environments/environment';
 
@@ -21,7 +22,8 @@ import { environment } from 'environments/environment';
 		HttpClientModule,
 		RouterModule,
 		AppRoutingModule,
-		ApiModule.forRoot({ rootUrl: environment.apiUrl })
+		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
+		PageTitleSharedModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

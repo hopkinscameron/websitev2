@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 
 import { AboutModel } from '../api/models/about-model';
 import { AboutService } from '../api/services/about.service';
@@ -17,13 +17,14 @@ export class AboutComponent implements OnInit {
 	 * Construction to create an instance of the About Component
 	 * @param {AboutService} aboutService The api service to get information about the about page
 	*/
-	constructor(private aboutService: AboutService) { }
+	constructor(private ngZone: NgZone, private aboutService: AboutService) { }
 
-	/**
-	 * On component initialized
-	*/
+	/** On component initialized */
 	async ngOnInit(): Promise<void> {
-		this.content = await this.aboutService.getLatestAbout({ by: 'updated' }).toPromise();
-		this.loading = false;
+		const content = await this.aboutService.getLatestAbout({ by: 'updated' }).toPromise();
+		this.ngZone.run(() => {
+			this.content = content;
+			this.loading = false;
+		});
 	}
 }

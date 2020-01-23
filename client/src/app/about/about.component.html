@@ -1,1 +1,26 @@
-<p>about works!</p>
+<page-title [title]="'About Me'"></page-title>
+<div *ngIf="content">
+	<div *ngIf="content.bio">
+		<h4>Who am I?</h4>
+		<p>{{content.bio}}</p>
+	</div>
+	<div *ngIf="content.hobbies">
+		<h4>What I like to do for fun</h4>
+		<ul>
+			<li *ngFor="let hobby of content.hobbies">
+				{{hobby}}
+			</li>
+		</ul>
+	</div>
+	<div *ngIf="content.favoriteGames">
+		<h4>I love playing video games, so here are some of my favorite</h4>
+		<div *ngFor="let favoriteGame of content.favoriteGames">
+			<p>{{favoriteGame.category}}</p>
+			<ul>
+				<li *ngFor="let game of favoriteGame.games">
+					{{game}}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

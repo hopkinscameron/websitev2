@@ -184,7 +184,7 @@ export default {
 			  			}
 					}
 		  		},
-				required: ['bio', 'hobbies', 'favoriteGames']
+				required: ['bio']
 			},
 			FavoriteGameModel: {
 		  		type: 'object',
@@ -192,11 +192,14 @@ export default {
 					category: {
 			  			type: 'string'
 					},
-					game: {
-			  			type: 'string'
+					games: {
+						type: 'array',
+						items: {
+						  type: 'string'
+						}
 					}
 		  		},
-		  		required: ['category', 'game']
+		  		required: ['category', 'games']
 			}
 	  	}
 	},
