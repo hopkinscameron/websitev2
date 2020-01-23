@@ -1,3 +1,4 @@
+import { AboutCachingService } from './services/about-caching.service';
 import { AboutComponent } from './about/about.component';
 import { ApiModule } from './api/api.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,7 @@ import { environment } from 'environments/environment';
 		ApiModule.forRoot({ rootUrl: environment.apiUrl }),
 		PageTitleSharedModule
 	],
-	providers: [],
+	providers: [AboutCachingService],
 	bootstrap: [AppComponent]
 })
 /** The main application module. */

@@ -6,3 +6,12 @@ body {
 	margin: 0;
 	font-family: 'Exo', sans-serif;
 }
+
+hr {
+	width: 100%;
+    display: block;
+    height: 3px;
+    border: 0;
+    border-top: 3px solid $theme-primary;
+    padding: 0;
+}
