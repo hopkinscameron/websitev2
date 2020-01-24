@@ -1,4 +1,4 @@
-// import * as _ from 'lodash';
+import * as _ from 'lodash';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -23,33 +23,41 @@ export class AboutComponent implements OnInit {
 	 * Construction to create an instance of the About Component
 	 * @param {AboutService} aboutService The api service to get information about the about page
 	*/
-	constructor(/* private ngZone: NgZone, */private aboutCachingService: AboutCachingService, private aboutService: AboutService) { }
+	constructor(private aboutCachingService: AboutCachingService, private aboutService: AboutService) { }
 
 	/** On component initialized */
-	async ngOnInit(): Promise<void> {
+	ngOnInit(): void {
 		// check cache first
-		let content = this.aboutCachingService.loadAbout();
-		if (!content) {
-			content = await this.aboutService.getLatestAbout({ by: 'updated' }).toPromise();
-			this.aboutCachingService.saveAbout(content);
+		const cachedData = this.aboutCachingService.loadAbout();
+		if (!cachedData) {
+			this.aboutService.getLatestAbout({ by: 'updated' }).toPromise().then((apiData: AboutModel) => {
+				this.aboutCachingService.saveAbout(apiData);
+				this.setContent(apiData);
+			});
+		} else {
+			this.setContent(cachedData);
+		}
+	}
+
+	/**
+	 * Inititialzed the content
+	 * @param {AboutModel} content The content to set for the about page
+	*/
+	private setContent(content: AboutModel): void {
+		if (content) {
+			// let's break up the list to have a maximum of {maxList} items per line
+			let pos = 0;
+			_.forEach(content.hobbies, (hobby: string) => {
+				if (!this.brokenUpHobbyList.length || this.brokenUpHobbyList[pos].length === this.maxList) {
+					this.brokenUpHobbyList.push([hobby]);
+					pos = this.brokenUpHobbyList[pos].length === this.maxList ? pos + 1 : pos;
+				} else {
+					this.brokenUpHobbyList[pos].push(hobby);
+				}
+			});
 		}
 
-		// this.ngZone.run(() => {
-		// 	if (content) {
-		// 		// let's break up the list to have a maximum of {maxList} items per line
-		// 		let pos = 0;
-		// 		_.forEach(content.hobbies, (hobby: string) => {
-		// 			if (!this.brokenUpHobbyList.length || this.brokenUpHobbyList[pos].length === this.maxList) {
-		// 				this.brokenUpHobbyList.push([hobby]);
-		// 				pos = this.brokenUpHobbyList[pos].length === this.maxList ? pos + 1 : pos;
-		// 			} else {
-		// 				this.brokenUpHobbyList[pos].push(hobby);
-		// 			}
-		// 		});
-		// 	}
-
-		// 	this.content = content;
-		// 	this.loading = false;
-		// });
+		this.content = content;
+		this.loading = false;
 	}
 }

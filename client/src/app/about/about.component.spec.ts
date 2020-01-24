@@ -3,23 +3,18 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { AboutCachingService } from 'app/services/about-caching.service';
 import { AboutComponent } from './about.component';
 import { AboutService } from 'app/api/services/about.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PageTitleSharedModule } from 'shared/page-title/page-title.module';
-// import { NgZone } from '@angular/core';
 import { of } from 'rxjs';
 
 describe('AboutComponent', () => {
 	let component: AboutComponent;
 	let fixture: ComponentFixture<AboutComponent>;
 
-	let mockNGZone: any;
 	let mockAboutCachingService: any;
 	let mockAboutService: any;
 
 	beforeEach(async(() => {
-		mockNGZone = jasmine.createSpyObj('mockNGZone', ['run']);
-		mockNGZone.run.and.callThrough();
-
 		mockAboutCachingService = jasmine.createSpyObj('mockAboutCachingService', ['loadAbout', 'saveAbout']);
 		mockAboutCachingService.loadAbout.and.returnValue(null);
 		mockAboutCachingService.saveAbout.and.callFake(() => { /* function was called */ });
@@ -29,10 +24,8 @@ describe('AboutComponent', () => {
 
 		TestBed.configureTestingModule({
 			declarations: [AboutComponent],
-			imports: [PageTitleSharedModule],
+			imports: [HttpClientTestingModule, PageTitleSharedModule],
 			providers: [
-				HttpClient,
-				// { provide: NgZone, useValue: mockNGZone },
 				{ provide: AboutCachingService, useValue: mockAboutCachingService },
 				{ provide: AboutService, useValue: mockAboutService }
 			]
@@ -49,5 +42,30 @@ describe('AboutComponent', () => {
 		it('should create', () => {
 			expect(component).toBeTruthy();
 		});
+	});
+
+	describe('ngOnInit', () => {
+		beforeEach(() => {
+			component.ngOnInit();
+		});
+
+		it('should load from cache first', () => {
+			expect(mockAboutCachingService.loadAbout).toHaveBeenCalled();
+		});
+
+		it('should load from backend and cache', async(() => {
+			fixture.whenStable().then(() => {
+				expect(mockAboutService.getLatestAbout).toHaveBeenCalled();
+				expect(mockAboutCachingService.saveAbout).toHaveBeenCalled();
+			});
+		}));
+
+		// TODO: change the spy to return data
+		// it('should not load from backend', () => {
+		// 	const model: AboutModel = { bio: '' };
+		// 	mockAboutCachingService.loadAbout.and.returnValue(model);
+		// 	component.ngOnInit();
+		// 	expect(mockAboutService.getLatestAbout).not.toHaveBeenCalled();
+		// });
 	});
 });
