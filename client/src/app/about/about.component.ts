@@ -1,6 +1,6 @@
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AboutCachingService } from '../services/about-caching.service';
 import { AboutModel } from '../api/models/about-model';
@@ -23,7 +23,7 @@ export class AboutComponent implements OnInit {
 	 * Construction to create an instance of the About Component
 	 * @param {AboutService} aboutService The api service to get information about the about page
 	*/
-	constructor(private ngZone: NgZone, private aboutCachingService: AboutCachingService, private aboutService: AboutService) { }
+	constructor(/* private ngZone: NgZone, */private aboutCachingService: AboutCachingService, private aboutService: AboutService) { }
 
 	/** On component initialized */
 	async ngOnInit(): Promise<void> {
@@ -34,20 +34,22 @@ export class AboutComponent implements OnInit {
 			this.aboutCachingService.saveAbout(content);
 		}
 
-		this.ngZone.run(() => {
-			// let's break up the list to have a maximum of {maxList} items per line
-			let pos = 0;
-			_.forEach(content.hobbies, (hobby: string) => {
-				if (!this.brokenUpHobbyList.length || this.brokenUpHobbyList[pos].length === this.maxList) {
-					this.brokenUpHobbyList.push([hobby]);
-					pos = this.brokenUpHobbyList[pos].length === this.maxList ? pos + 1 : pos;
-				} else {
-					this.brokenUpHobbyList[pos].push(hobby);
-				}
-			});
+		// this.ngZone.run(() => {
+		// 	if (content) {
+		// 		// let's break up the list to have a maximum of {maxList} items per line
+		// 		let pos = 0;
+		// 		_.forEach(content.hobbies, (hobby: string) => {
+		// 			if (!this.brokenUpHobbyList.length || this.brokenUpHobbyList[pos].length === this.maxList) {
+		// 				this.brokenUpHobbyList.push([hobby]);
+		// 				pos = this.brokenUpHobbyList[pos].length === this.maxList ? pos + 1 : pos;
+		// 			} else {
+		// 				this.brokenUpHobbyList[pos].push(hobby);
+		// 			}
+		// 		});
+		// 	}
 
-			this.content = content;
-			this.loading = false;
-		});
+		// 	this.content = content;
+		// 	this.loading = false;
+		// });
 	}
 }

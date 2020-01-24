@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -8,9 +9,9 @@ describe('HeaderComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [HeaderComponent]
-		})
-			.compileComponents();
+			declarations: [HeaderComponent],
+			imports: [CommonModule]
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -19,7 +20,9 @@ describe('HeaderComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	describe('Constructor', () => {
+		it('should create', () => {
+			expect(component).toBeTruthy();
+		});
 	});
 });

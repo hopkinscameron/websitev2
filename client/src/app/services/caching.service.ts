@@ -32,7 +32,7 @@ export class CachingService {
 			const record: ICacheModel = JSON.parse(item);
 
 			// expired data will return null
-			if (!record || (record.expiration && new Date(record.expiration) <= new Date())) {
+			if (!record || (record.expiration && new Date(record.expiration) > new Date())) {
 				return null;
 			}
 
