@@ -7,12 +7,13 @@
     "declaration": false,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+	"experimentalDecorators": true,
+	"allowJs": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "importHelpers": true,
-    "target": "es6",
+    "target": "ESNext",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -34,6 +35,6 @@
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   },
-  "include": ["**.ts", "config/**/*", "app/**/*", "index.js"],
+  "include": ["**.ts", "config/**/*", "app/**/*", "shared/**/*", "index.ts", "configure-swagger.ts"],
   "exclude": ["node_modules", "dist/**/*", "start.js"]
 }

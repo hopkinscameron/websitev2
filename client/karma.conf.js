@@ -10,6 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
 	  require('karma-coverage-istanbul-reporter'),
+	  require('karma-coverage'),
 	  require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
@@ -39,7 +40,7 @@ module.exports = function (config) {
 	autoWatch: true,
 	captureTimeout: 60000,
 	browserNoActivityTimeout: 60000,
-    browsers: ['Chrome'],
+	browsers: ['Chrome'],
     singleRun: true, // set to true for deployment?
     restartOnFileChange: true
   });

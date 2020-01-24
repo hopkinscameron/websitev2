@@ -30,6 +30,9 @@ export default class Config implements IConfig {
     	this.config.port = process.env.PORT;
     	this.config.frontEnd = process.env.FRONTEND;
     	this.config.version = process.env.VERSION;
+    	this.config.mongoUri = process.env.MONGO_URI;
+    	// only allow mongoose logs in dev env
+    	this.config.mongoDebug = _.lowerCase(this.config.env) === 'development' ? _.lowerCase(process.env.MONGO_DEBUG) === 'true' : false;
     }
 
     /**

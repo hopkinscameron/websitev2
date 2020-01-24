@@ -7,11 +7,14 @@
     "declaration": false,
 	"downlevelIteration": true,
 	"emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+	"experimentalDecorators": true,
+	"allowJs": true,
     "module": "esnext",
-    "moduleResolution": "node",
+	"moduleResolution": "node",
+	"esModuleInterop": true,
+	"allowSyntheticDefaultImports": true,
     "importHelpers": true,
-    "target": "es2020",
+    "target": "es6",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -34,5 +37,5 @@
     "strictInjectionParameters": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "src/app/api/**/*"]
 }

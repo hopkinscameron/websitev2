@@ -1,0 +1,5 @@
+@import '../variables.scss';
+
+.header-compensation {
+	padding-top: calc(#{$header-fixed-height-size} + 10px);
+}
