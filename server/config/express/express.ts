@@ -4,6 +4,7 @@ import AboutRoutes from '../../app/about/about.routes';
 import Config from '../configuration/config';
 import CoreRoutes from '../../app/core/core.routes';
 import IExpress from './iexpress';
+import ResumeRoutes from '../../app/resume/resume.routes';
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cookieParser from 'cookie-parser';
@@ -89,6 +90,7 @@ export default class Express implements IExpress {
     	const router = express.Router();
     	router.use('', new CoreRoutes().router);
     	router.use('', new AboutRoutes().router);
+    	router.use('', new ResumeRoutes().router);
 
     	this.app.use('/api/', router);
     }

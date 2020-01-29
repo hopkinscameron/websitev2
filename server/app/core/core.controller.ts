@@ -8,7 +8,5 @@ export default class CoreController {
      * @param {Response} res the response to the client
      * @returns {Response} The response
      */
-	healthCheck(_req: Request, res: Response): Response {
-		return res.json({ message: 'Everything is okay' });
-	}
+	healthCheck = (_req: Request, res: Response): Response => res.json({ message: 'Everything is okay' });
 }

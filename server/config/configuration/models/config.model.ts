@@ -1,6 +1,7 @@
 /** Server configuration settings model */
 export default class ConfigModel {
-    env: string;
+	env: string;
+	scheme: string;
     host: string;
     port: string;
     frontEnd: string;

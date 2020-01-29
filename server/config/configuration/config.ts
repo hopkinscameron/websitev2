@@ -26,6 +26,7 @@ export default class Config implements IConfig {
     	dotenv.config();
 
     	this.config.env = process.env.NODE_ENV;
+    	this.config.scheme = process.env.SCHEME;
     	this.config.host = process.env.HOST;
     	this.config.port = process.env.PORT;
     	this.config.frontEnd = process.env.FRONTEND;

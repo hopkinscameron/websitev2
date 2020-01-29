@@ -15,11 +15,11 @@ export default class AboutRoutes {
     		.post(asyncHandler(this.aboutController.createAboutInfo));
 
     	this.router.route('/v1/about/latest')
-    		.get(this.aboutController.getLatestAboutInfo);
+    		.get(asyncHandler(this.aboutController.getLatestAboutInfo));
 
     	this.router.route('/v1/about/:id')
     		.get(this.aboutController.getAboutInfo)
-    		.post(this.aboutController.updateAboutInfo);
+    		.post(asyncHandler(this.aboutController.updateAboutInfo));
 
     	// bind the middleware
     	this.router.param('id', asyncHandler(this.aboutController.aboutById));

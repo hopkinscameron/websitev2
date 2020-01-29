@@ -8,21 +8,25 @@ import _ from 'lodash';
 /** The about controller */
 export default class AboutController {
 	/**
-     * Gets the data for the about page
+     * Creates the data for the about page
      * @param {Request} req the request from the client
      * @param {Response} res the response to the client
      * @returns {Promise<AboutModel>} The response
      */
-	async createAboutInfo(req: Request, res: Response): Promise<AboutModel> {
-		await FavoriteGames.insertMany(req.body.favoriteGames);
-		const games = await FavoriteGames.find({});
-		const a = new AboutModel();
-		a.favoriteGames = games;
-		a.hobbies = req.body.hobbies;
-		a.bio = req.body.bio;
-		req.foundAbout = await Abouts.create(a);
-		return this.getAboutInfo(req, res);
-	}
+	createAboutInfo = async (req: Request, res: Response): Promise<AboutModel> => {
+		try {
+			await FavoriteGames.insertMany(req.body.favoriteGames);
+			const games = await FavoriteGames.find({});
+			const a = new AboutModel();
+			a.favoriteGames = games;
+			a.hobbies = req.body.hobbies;
+			a.bio = req.body.bio;
+			const foundAbout = await Abouts.create(a);
+			return res.json(foundAbout.toObject());
+		} catch (err) {
+			return res.status(500).send(err.message);
+		}
+	};
 
 	/**
      * Gets the latest data for the about page
@@ -30,7 +34,7 @@ export default class AboutController {
      * @param {Response} res the response to the client
      * @returns {Promise<AboutModel>} The latest AboutModel
      */
-	async getLatestAboutInfo(req: Request, res: Response): Promise<AboutModel> {
+	getLatestAboutInfo = async (req: Request, res: Response): Promise<AboutModel> => {
 		try {
 			const sortBy: IDateSortModel = new DateSortModel();
 			sortBy.updatedAt = 1;
@@ -41,13 +45,12 @@ export default class AboutController {
 			}
 
 			const foundAbouts = await Abouts.find({ }).sort(sortBy).limit(1).populate('favoriteGames').exec();
-			const foundAbout = foundAbouts ? foundAbouts[0].toObject() : null;
 
-			return res.json(foundAbout);
+			return res.json(foundAbouts ? foundAbouts[0].toObject() : null);
 		} catch (err) {
-			throw err;
+			return res.status(500).send(err.message);
 		}
-	}
+	};
 
 	/**
      * Gets the data for the about page
@@ -55,13 +58,13 @@ export default class AboutController {
      * @param {Response} res the response to the client
      * @returns {AboutModel} The AboutModel by id
      */
-	getAboutInfo(req: Request, res: Response): AboutModel {
+	getAboutInfo = (req: Request, res: Response): AboutModel => {
 		try {
 			return res.json(req.foundAbout.toObject());
 		} catch (err) {
-			throw err;
+			return res.status(500).send(err.message);
 		}
-	}
+	};
 
 	/**
      * Updates the data for the about page
@@ -69,11 +72,15 @@ export default class AboutController {
      * @param {Response} res the response to the client
      * @returns {Promise<AboutModel>} The Updated AboutModel
      */
-	async updateAboutInfo(req: Request, res: Response): Promise<AboutModel> {
-		req.foundAbout.hobbies = req.body.hobbies;
-		req.foundAbout.bio = req.body.bio;
-		return res.json(await req.foundAbout.save());
-	}
+	updateAboutInfo = async (req: Request, res: Response): Promise<AboutModel> => {
+		try {
+			req.foundAbout.hobbies = req.body.hobbies;
+			req.foundAbout.bio = req.body.bio;
+			return res.json(await req.foundAbout.save());
+		} catch (err) {
+			return res.status(500).send(err.message);
+		}
+	};
 
 	/**
      * Gets the data for the about page by id
@@ -83,7 +90,7 @@ export default class AboutController {
 	 * @param {string} id the parameter id
      * @returns {Promise<NextFunction>} The response
      */
-	async aboutById(req: Request, res: Response, next: NextFunction, id: string): Promise<NextFunction> {
+	aboutById = async (req: Request, res: Response, next: NextFunction, id: string): Promise<NextFunction> => {
 		try {
 			const foundAbout = await Abouts.findById(id).populate('favoriteGames').exec();
 

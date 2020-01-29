@@ -5,6 +5,7 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { AboutService } from './services/about.service';
 import { HealthCheckService } from './services/health-check.service';
+import { ResumeService } from './services/resume.service';
 
 /**
  * Module that provides all services and configuration.
@@ -16,6 +17,7 @@ import { HealthCheckService } from './services/health-check.service';
   providers: [
     AboutService,
     HealthCheckService,
+    ResumeService,
     ApiConfiguration
   ],
 })
