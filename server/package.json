@@ -38,7 +38,7 @@
     "glob": "~7.1.6",
     "helmet": "~3.21.2",
     "http-errors": "~1.7.3",
-    "lodash": "~4.17.15",
+    "lodash": "~4.17.19",
     "method-override": "~3.0.0",
     "mongoose": "~5.8.7",
     "morgan": "~1.9.1",
